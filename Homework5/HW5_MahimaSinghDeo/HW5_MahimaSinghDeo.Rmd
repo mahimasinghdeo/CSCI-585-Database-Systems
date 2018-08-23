@@ -1,0 +1,82 @@
+---
+title: "HW5 notebook"
+output: html_notebook
+---
+
+Here is the first method for overlaying shape data on a raster.
+
+Use the following packages (install them first), then use them via
+the library() call: tmap, tmaptools, rgdal, sp, OpenStreetMap, osmdata
+
+These calls are useful: readOGR(), tmaptools::read_osm(),
+tm_shape(), tm_raster(), tm_dots()
+
+1. readOGR() your shapefile, store it in a var
+2. read_osm() the bbox of #1 above, store it in a var
+3. do tm_shape() on #2 + tm_raster() +
+tm_shape() on #1 + tm_dots() to specify point color and size
+
+```{r}
+#Uncomment and run installation commands mentioned below if packages are not present.
+
+#install.packages("tmap")
+#install.packages("tmaptools")
+#install.packages("rgdal")
+#install.packages("sp")
+#install.packages("OpenStreetMap")
+#install.packages("osmdata")
+
+#load and attach the installed packages using library
+library("tmap")
+library("tmaptools")
+library("rgdal")
+library("sp")
+library("OpenStreetMap")
+library("osmdata")
+
+# Read .shp file by providing the path where it is stored.
+myfile = readOGR("/Users/mahimasinghdeo/Downloads/mygeodata/new.shp")
+#Read Open Street Map Data of the bounding box using read_osm()
+mybox = read_osm(myfile)
+#tm_shape specifies the shape object. tm_raster draws a raster for it. 
+#tm_dots draws dots on the shape provided. Colour and size of dots have been set. 
+tm_shape(mybox)+tm_raster()+tm_shape(myfile)+tm_dots(size = 2.3, col = "red") 
+
+
+
+
+
+```
+
+And here's the second.
+
+Use these packages: PBSmapping, ggmap
+And these calls: importShapefile(), as.data.frame(), get_map(), ggmap(), 
+geom_point()
+
+1. importShapefile() into a var
+2. convert it (#1 above) to a dataframe, store it in a var
+3. get_map() with a location that's in your collection of (lat,long),
+store it in a var
+4. do ggmap() on #3, + geom_point() on #2
+
+```{r}
+#Uncomment and run installation commands mentioned below if packages are not present.
+
+#install.packages("PBSmapping")
+#install.packages("ggmap")
+
+#load and attach the installed packages using library
+library("PBSmapping")
+library("ggmap")
+
+# Import .shp file by providing the path where it is stored.
+myfile2 = importShapefile("/Users/mahimasinghdeo/Downloads/mygeodata/new.shp")
+#Convert .shp file data to a dataframe.
+mydataframe = as.data.frame(myfile2)
+#Get a map for the coordinates mentioned. A zoom level has been set.
+mylocation = get_map(location = c(-118.2802,34.0230), zoom=16)
+#ggmap() plots a raster for the map obtained. 
+#geom_point() creates a scatterplot for points in dataframe. Size and colour have been set.
+ggmap(mylocation) + geom_point( data = mydataframe, aes(X,Y), size =1.5, col="red")
+```

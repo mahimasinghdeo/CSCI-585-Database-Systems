@@ -1,0 +1,51 @@
+QUERY FOR CONVEX HULL
+======================
+
+SELECT ST_AsText( ST_ConvexHull( ST_Collect(ST_GeomFromText
+('MULTIPOINT(-118.2802 34.0230,-118.2798 34.0213,-118.2815 34.0234,-118.2830 34.0217,
+-118.2780 34.0256, -118.2816 34.0256, -118.2833 34.0250, -118.2843 34.0231, -118.2789 34.0241)',4326))));
+
+RESULT
+======================
+	 POLYGON((-118.2798 34.0213,-118.283 34.0217,-118.2843 34.0231,
+-118.2833 34.025,-118.2816 34.0256,-118.278 34.0256,-118.2798 34.0213))
+
+
+QUERY FOR 3 NEAREST NEIGHBOURS
+===============================
+
+create table locations (id integer not null unique, address varchar(255), longitude float, latitude float);
+
+insert into locations (id, address, longitude, latitude) values (1,'Galen Center’,-118.2798,34.0213);
+insert into locations (id, address, longitude, latitude) values (2, ‘ShrineAuditorium' , -118.2815,34.0234);
+insert into locations (id, address, longitude, latitude) values (3,'Leavey Library’,-118.2830,34.0217);
+insert into locations (id, address, longitude, latitude) values (4,'Pasta Roma’,-118.2780,34.0256);
+insert into locations (id, address, longitude, latitude) values (5,'Troy Complex’,-118.2816,34.0256);
+insert into   locations(id,address, longitude, latitude) values (6,’Caruso Catholic Center’, -118.2833,34.0250);
+insert into locations (id, address, longitude, latitude) values (7, ’UniversityChurch’, -118.2843,34.0231);
+insert into locations (id, address, longitude, latitude) values (8,'Vagabond Inn’,-118.2789,34.0241);
+
+
+
+select l.address, l.longitude, l.latitude, 
+ST_DISTANCE( ST_POINT(-118.2802,34.0230), ST_POINT(l.longitude, l.latitude) ) AS distance
+from locations as l 
+order by distance ASC
+limit 3;
+
+
+RESULT
+===========================
+
+	address      | longitude | latitude |      distance
+-------------------+-----------+----------+---------------------
+ Shrine Auditorium | -118.2815 |  34.0234 | 0.00136014705087377
+ Vagabond Inn      | -118.2789 |  34.0241 | 0.00170293863658909
+ Galen Center      | -118.2798 |  34.0213 |  0.0017464249196636
+(3 rows)
+
+
+
+
+
+

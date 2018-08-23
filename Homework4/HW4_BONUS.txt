@@ -1,0 +1,71 @@
+BONUS
+===============
+
+QUERY 1
+======================
+
+g = TinkerGraph.open().traversal()
+
+g.addV("CS101").property(id,"CS101").addV("CS201").property(id, "CS201").addE("pre_req").from(V("CS201")).to(V("CS101")).property(id,1).addV("CS220").property(id,"CS220").addE("pre_req").from(V("CS220")).to(V("CS201")).property(id,2).addV("CS334").property(id, "CS334").addE("pre_req").from(V("CS334")).to(V("CS201")).property(id,3).addV("CS400").property(id, "CS400").addE("pre_req").from(V("CS400")).to(V("CS334")).property(id,4).addV("CS420").property(id, "CS420").addE("pre_req").from(V("CS420")).to(V("CS220")).property(id,5).addE("co_req").from(V("CS420")).to(V("CS220")).property(id,6).addV("CS526").property(id, "CS526").addE("pre_req").from(V("CS526")).to(V("CS400")).property(id,7).addE("co_req").from(V("CS526")).to(V("CS400")).property(id,8).addV("CS681").property(id, "CS681").addE("pre_req").from(V("CS681")).to(V("CS334")).property(id,9)
+
+EXPLANATION:
+Function chaining is used. The first command creates a graph and traversal instance.
+The second command adds all the vertices in the graph and the edges joining them.
+
+
+QUERY 2
+=======================
+g.V().as("a").out().as("b").groupCount().by(select("a","b")).unfold().filter(select(values).is(eq(2))).select(keys)
+
+EXPLANATION:
+We take every vertex as 'a' and every adjacent vertex with an incoming edge from a as 'b'. 
+We use groupCount by a and b to select the number of times 'a' and 'b' have been part of a traversal.
+We  unfold these values to display them separately.
+We are only interested in pairs which are traversed twice, therefore we use filter.
+We are only interested in values of a and b hence we need only keys and not the value(i.e. 2)
+
+
+QUERY 3
+=========================
+g.V("CS526").repeat(out().dedup()).emit()
+
+EXPLANATION:
+We choose a given vertex and repeatedly find the vertex which has an edge going to it from the given vertex. (finding predecessors)
+We use dedup to remove repeatedly seen objects from the traversal.
+emit() is used along with repeat to display the results of the repeated function.
+
+
+QUERY 4
+===========================
+g.V("CS101").repeat(__.in()).emit().path().count(local).max()
+
+EXPLANATION:
+We start with a given node and repeatedly find the vertices which have their outgoing edges to the given node. These edges form a path and we compute the length of each path and finally find the maximum.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

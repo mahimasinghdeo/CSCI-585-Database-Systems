@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<Style id="segmentLine">
+      <LineStyle>
+        <color>ff00ffff</color>
+        <width>3</width>
+      </LineStyle>
+</Style>
+
+# FIRST
+  <Placemark>
+    <name>University Gateway[HOME]</name>
+    <description>Home.</description>
+    <Point>
+      <coordinates>-118.2802,34.0230,0</coordinates>
+    </Point>
+  </Placemark>
+  
+#SECOND
+  <Placemark>
+    <name>Galen Center</name>
+    <description>Indoor Arena</description>
+    <Point>
+      <coordinates>-118.2798,34.0213,0</coordinates>
+    </Point>
+  </Placemark>
+
+#THIRD
+  <Placemark>
+    <name>Shrine Auditorium</name>
+    <description>Auditorium.</description>
+    <Point>
+      <coordinates>-118.2815,34.0234,0</coordinates>
+    </Point>
+  </Placemark>
+
+#FOURTH
+  <Placemark>
+    <name>Leavey Library</name>
+    <description>Library at USC.</description>
+    <Point>
+      <coordinates>-118.2830,34.0217,0</coordinates>
+    </Point>
+  </Placemark>
+
+#FIFTH
+  <Placemark>
+    <name>Pasta Roma</name>
+    <description>Italian Restaurant</description>
+    <Point>
+      <coordinates>-118.2780,34.0256,0</coordinates>
+    </Point>
+  </Placemark>
+
+#SIXTH
+  <Placemark>
+    <name>Troy Complex</name>
+    <description>USC Student Housing.</description>
+    <Point>
+      <coordinates>-118.2816,34.0256,0</coordinates>
+    </Point>
+  </Placemark>
+
+#SEVENTH
+<Placemark>
+    <name>Caruso Catholic Center</name>
+    <description>Catholic Center near USC</description>
+    <Point>
+      <coordinates>-118.2833,34.0250,0</coordinates>
+    </Point>
+  </Placemark>
+
+#EIGHTH
+<Placemark>
+    <name>University Church</name>
+    <description>Church in USC</description>
+    <Point>
+      <coordinates>-118.2843,34.0231,0</coordinates>
+    </Point>
+  </Placemark>
+
+#NINTH
+  <Placemark>
+    <name>Vagabond Inn</name>
+    <description>Inn near USC.</description>
+    <Point>
+      <coordinates>-118.2789,34.0241,0</coordinates>
+    </Point>
+  </Placemark>
+
+#CONVEX HULL
+<Placemark>
+        <name>Convex Hull</name>
+        <Style>
+            <LineStyle>
+                <color>ff0000ff</color>
+                <width>7</width>
+            </LineStyle>
+        </Style>
+        <LinearRing>
+            <coordinates>
+              -118.2798,34.0213
+              -118.283,34.0217 
+              -118.2843,34.0231 
+              -118.2833,34.025 
+              -118.2816,34.0256 
+              -118.278,34.0256 
+              -118.2798,34.0213
+            </coordinates>
+        </LinearRing>
+</Placemark>
+
+#LINE SEGMENT 1
+<Placemark>
+        <name>Line Segment 1</name>
+        <styleUrl>#segmentLine</styleUrl>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <LineString>
+            <coordinates>
+              -118.2802,34.0230
+              -118.2815,34.0234
+            </coordinates>
+        </LineString>
+</Placemark>
+
+#LINE SEGMENT 2
+<Placemark>
+        <name>Line Segment 1</name>
+        <styleUrl>#segmentLine</styleUrl>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <LineString>
+            <coordinates>
+              -118.2802,34.0230 
+              -118.2789,34.0241
+            </coordinates>
+        </LineString>
+</Placemark>
+
+#LINE SEGMENT 3
+<Placemark>
+        <name>Line Segment 1</name>
+        <styleUrl>#segmentLine</styleUrl>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <LineString>
+            <coordinates>
+              -118.2802,34.0230 
+              -118.2798,34.0213
+            </coordinates>
+        </LineString>
+</Placemark>
+</Document> 
+</kml>
